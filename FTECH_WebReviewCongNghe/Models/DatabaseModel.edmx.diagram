@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="29baaa21724149d38b573017efbce33a" Name="Diagram1">
+        <EntityTypeShape EntityType="dbReviewDoCongNgheFTECHModel.BAIVIET" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbReviewDoCongNgheFTECHModel.CHUCVU" Width="1.5" PointX="5.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbReviewDoCongNgheFTECHModel.DANHMUC" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbReviewDoCongNgheFTECHModel.DOITAC" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbReviewDoCongNgheFTECHModel.LINKLIENKET" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbReviewDoCongNgheFTECHModel.LOAIBAIDANG" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbReviewDoCongNgheFTECHModel.SANPHAM" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbReviewDoCongNgheFTECHModel.TAIKHOAN" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbReviewDoCongNgheFTECHModel.TRANGTHAIBAIDANG" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="dbReviewDoCongNgheFTECHModel.FK__BAIVIET__MADANHM__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="dbReviewDoCongNgheFTECHModel.FK__BAIVIET__MALOAI__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="dbReviewDoCongNgheFTECHModel.FK__BAIVIET__MATRANG__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="dbReviewDoCongNgheFTECHModel.FK__LINKLIENK__MABAI__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="dbReviewDoCongNgheFTECHModel.FK__TAIKHOAN__IDCHUC__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="dbReviewDoCongNgheFTECHModel.FK__SANPHAM__MADANHM__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="dbReviewDoCongNgheFTECHModel.FK__LINKLIENK__MADOI__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="dbReviewDoCongNgheFTECHModel.FK__LINKLIENK__MASAN__3A81B327" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "addProduct";
+    List<FTECH_WebReviewCongNghe.Models.DANHMUC> dsDM = ViewBag.dsDANHMUC;
+    Layout = "~/Views/Shared/GenericAdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm sản phẩm</title>
+    <link rel="stylesheet" href="~/MySource/css/add.css">
+</head>
+<body>
+    <h1 class="title_addPr">Thêm sản phẩm</h1>
+    <div class="addPd_container">
+        <div id="bg_add">
+            <p>Chưa có ảnh nào được tải lên<p>
+        </div>
+        <div class="form_add">
+            <form action="~/Admin/addProduct" method="post" enctype="multipart/form-data">
+                <label for="ten-san-pham">Tên sản phẩm:</label>
+                <input type="text" id="ten-san-pham" name="TENSANPHAM" required>
+                <label for="don-gia">Đơn giá:</label>
+                <input type="text" id="don-gia" name="DONGIA" required>
+                <label for="so-luong">Số lượng:</label>
+                <input type="number" id="so-luong" name="SOLUONG" required>
+                <label for="hinh-anh">Hình ảnh:</label>
+                <input type="file" id="hinh-anh" name="fileAnh">
+                <button onclick="uploadImage()">Xem hình ảnh</button>
+                <label for="danh-muc">Danh mục:</label>
+                <select id="danh-muc" name="MADANHMUC" required>
+                    <option value="">Chọn danh mục</option>
+                    @{
+                        foreach (var dm in dsDM)
+                        {
+                            <option value="@dm.MADANHMUC">@dm.TENDANHMUC</option>
+                        }
+                    }
+                </select>
+                <label for="mo-ta">Mô tả:</label>
+                <textarea id="mo-ta" name="MOTA" rows="5" required></textarea>
+                <div class="addPr_btn">
+                    <a href="~/home"><button type="button">Trở về</button></a>
+                    <button type="submit">Thêm mới</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+function uploadImage() {
+	  var fileInput = document.getElementById('hinh-anh');
+	  var file = fileInput.files[0];
+	  var imageType = /image.*/;
+
+	  if (file.type.match(imageType)) {
+	    var reader = new FileReader();
+
+	    reader.onload = function(e) {
+	      var img = new Image();
+	      img.src = reader.result;
+	      var imagePreview = document.getElementById('bg_add');
+	      imagePreview.innerHTML = '';
+	      imagePreview.appendChild(img);
+	    }
+
+	    reader.readAsDataURL(file);
+	  }
+	  else {
+	    alert('Chỉ chấp nhận file hình ảnh');
+	  }
+	}
+</script>
+</html>

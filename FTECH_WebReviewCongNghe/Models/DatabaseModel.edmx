@@ -1,0 +1,637 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbReviewDoCongNgheFTECHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BAIVIET">
+          <Key>
+            <PropertyRef Name="MABAIVIET" />
+          </Key>
+          <Property Name="MABAIVIET" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TENBAIVIET" Type="ntext" />
+          <Property Name="HINHANH" Type="text" />
+          <Property Name="NOIDUNG" Type="ntext" />
+          <Property Name="TACGIA" Type="ntext" />
+          <Property Name="NGAYDANG" Type="datetime" />
+          <Property Name="MATRANGTHAI" Type="int" />
+          <Property Name="MADANHMUC" Type="int" />
+          <Property Name="MALOAI" Type="int" />
+        </EntityType>
+        <EntityType Name="CHUCVU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TENCHUCVU" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTA" Type="ntext" />
+        </EntityType>
+        <EntityType Name="DANHMUC">
+          <Key>
+            <PropertyRef Name="MADANHMUC" />
+          </Key>
+          <Property Name="MADANHMUC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TENDANHMUC" Type="nvarchar" MaxLength="50" />
+          <Property Name="HINHANH" Type="text" />
+        </EntityType>
+        <EntityType Name="DOITAC">
+          <Key>
+            <PropertyRef Name="MADOITAC" />
+          </Key>
+          <Property Name="MADOITAC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TENCONGTY" Type="nvarchar" MaxLength="255" />
+          <Property Name="CANHANDAIDIEN" Type="nvarchar" MaxLength="255" />
+          <Property Name="SDT" Type="char" MaxLength="10" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="255" />
+          <Property Name="MASOTHUE" Type="char" MaxLength="10" />
+          <Property Name="DIACHI" Type="nvarchar(max)" />
+          <Property Name="THOIGIANBATDAU" Type="date" />
+          <Property Name="HOPDONG" Type="nvarchar" MaxLength="255" />
+          <Property Name="PHUONGTHUCTHANHTOAN" Type="nvarchar" MaxLength="255" />
+          <Property Name="SOTAIKHOAN" Type="varchar" MaxLength="50" />
+          <Property Name="NGANHANG" Type="nvarchar" MaxLength="255" />
+          <Property Name="TENTAIKHOAN" Type="nvarchar" MaxLength="255" />
+          <Property Name="NGAYTAO" Type="datetime" />
+          <Property Name="TRANGTHAI" Type="int" />
+        </EntityType>
+        <EntityType Name="LINKLIENKET">
+          <Key>
+            <PropertyRef Name="IDLINKLIENKET" />
+          </Key>
+          <Property Name="IDLINKLIENKET" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MASANPHAM" Type="int" />
+          <Property Name="MADOITAC" Type="int" />
+          <Property Name="MABAIVIET" Type="int" />
+          <Property Name="LINKLIENKET" Type="nvarchar" MaxLength="2048" />
+          <Property Name="TILEHOAHONG" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="DOANHTHUBANHANG" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TRANGTHAI" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LOAIBAIDANG">
+          <Key>
+            <PropertyRef Name="MALOAI" />
+          </Key>
+          <Property Name="MALOAI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOAIBAIDANG" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SANPHAM">
+          <Key>
+            <PropertyRef Name="MASANPHAM" />
+          </Key>
+          <Property Name="MASANPHAM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TENSANPHAM" Type="nvarchar" MaxLength="255" />
+          <Property Name="MADANHMUC" Type="int" />
+        </EntityType>
+        <EntityType Name="TAIKHOAN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HOVATEN" Type="nvarchar" MaxLength="50" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="MATKHAU" Type="varchar" MaxLength="50" />
+          <Property Name="IDCHUCVU" Type="int" />
+          <Property Name="TRANGTHAI" Type="int" />
+        </EntityType>
+        <EntityType Name="TRANGTHAIBAIDANG">
+          <Key>
+            <PropertyRef Name="MATRANGTHAI" />
+          </Key>
+          <Property Name="MATRANGTHAI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TRANGTHAIBAIDANG" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__BAIVIET__MADANHM__33D4B598">
+          <End Role="DANHMUC" Type="Self.DANHMUC" Multiplicity="0..1" />
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DANHMUC">
+              <PropertyRef Name="MADANHMUC" />
+            </Principal>
+            <Dependent Role="BAIVIET">
+              <PropertyRef Name="MADANHMUC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BAIVIET__MALOAI__34C8D9D1">
+          <End Role="LOAIBAIDANG" Type="Self.LOAIBAIDANG" Multiplicity="0..1" />
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIBAIDANG">
+              <PropertyRef Name="MALOAI" />
+            </Principal>
+            <Dependent Role="BAIVIET">
+              <PropertyRef Name="MALOAI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BAIVIET__MATRANG__32E0915F">
+          <End Role="TRANGTHAIBAIDANG" Type="Self.TRANGTHAIBAIDANG" Multiplicity="0..1" />
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANGTHAIBAIDANG">
+              <PropertyRef Name="MATRANGTHAI" />
+            </Principal>
+            <Dependent Role="BAIVIET">
+              <PropertyRef Name="MATRANGTHAI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LINKLIENK__MABAI__3C69FB99">
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="0..1" />
+          <End Role="LINKLIENKET" Type="Self.LINKLIENKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAIVIET">
+              <PropertyRef Name="MABAIVIET" />
+            </Principal>
+            <Dependent Role="LINKLIENKET">
+              <PropertyRef Name="MABAIVIET" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LINKLIENK__MADOI__3B75D760">
+          <End Role="DOITAC" Type="Self.DOITAC" Multiplicity="0..1" />
+          <End Role="LINKLIENKET" Type="Self.LINKLIENKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOITAC">
+              <PropertyRef Name="MADOITAC" />
+            </Principal>
+            <Dependent Role="LINKLIENKET">
+              <PropertyRef Name="MADOITAC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LINKLIENK__MASAN__3A81B327">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="0..1" />
+          <End Role="LINKLIENKET" Type="Self.LINKLIENKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MASANPHAM" />
+            </Principal>
+            <Dependent Role="LINKLIENKET">
+              <PropertyRef Name="MASANPHAM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SANPHAM__MADANHM__2C3393D0">
+          <End Role="DANHMUC" Type="Self.DANHMUC" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DANHMUC">
+              <PropertyRef Name="MADANHMUC" />
+            </Principal>
+            <Dependent Role="SANPHAM">
+              <PropertyRef Name="MADANHMUC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TAIKHOAN__IDCHUC__276EDEB3">
+          <End Role="CHUCVU" Type="Self.CHUCVU" Multiplicity="0..1" />
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUCVU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAIKHOAN">
+              <PropertyRef Name="IDCHUCVU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbReviewDoCongNgheFTECHModelStoreContainer">
+          <EntitySet Name="BAIVIET" EntityType="Self.BAIVIET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHUCVU" EntityType="Self.CHUCVU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DANHMUC" EntityType="Self.DANHMUC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOITAC" EntityType="Self.DOITAC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LINKLIENKET" EntityType="Self.LINKLIENKET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAIBAIDANG" EntityType="Self.LOAIBAIDANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SANPHAM" EntityType="Self.SANPHAM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRANGTHAIBAIDANG" EntityType="Self.TRANGTHAIBAIDANG" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BAIVIET__MADANHM__33D4B598" Association="Self.FK__BAIVIET__MADANHM__33D4B598">
+            <End Role="DANHMUC" EntitySet="DANHMUC" />
+            <End Role="BAIVIET" EntitySet="BAIVIET" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BAIVIET__MALOAI__34C8D9D1" Association="Self.FK__BAIVIET__MALOAI__34C8D9D1">
+            <End Role="LOAIBAIDANG" EntitySet="LOAIBAIDANG" />
+            <End Role="BAIVIET" EntitySet="BAIVIET" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BAIVIET__MATRANG__32E0915F" Association="Self.FK__BAIVIET__MATRANG__32E0915F">
+            <End Role="TRANGTHAIBAIDANG" EntitySet="TRANGTHAIBAIDANG" />
+            <End Role="BAIVIET" EntitySet="BAIVIET" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LINKLIENK__MABAI__3C69FB99" Association="Self.FK__LINKLIENK__MABAI__3C69FB99">
+            <End Role="BAIVIET" EntitySet="BAIVIET" />
+            <End Role="LINKLIENKET" EntitySet="LINKLIENKET" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LINKLIENK__MADOI__3B75D760" Association="Self.FK__LINKLIENK__MADOI__3B75D760">
+            <End Role="DOITAC" EntitySet="DOITAC" />
+            <End Role="LINKLIENKET" EntitySet="LINKLIENKET" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LINKLIENK__MASAN__3A81B327" Association="Self.FK__LINKLIENK__MASAN__3A81B327">
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+            <End Role="LINKLIENKET" EntitySet="LINKLIENKET" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SANPHAM__MADANHM__2C3393D0" Association="Self.FK__SANPHAM__MADANHM__2C3393D0">
+            <End Role="DANHMUC" EntitySet="DANHMUC" />
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TAIKHOAN__IDCHUC__276EDEB3" Association="Self.FK__TAIKHOAN__IDCHUC__276EDEB3">
+            <End Role="CHUCVU" EntitySet="CHUCVU" />
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbReviewDoCongNgheFTECHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BAIVIET">
+          <Key>
+            <PropertyRef Name="MABAIVIET" />
+          </Key>
+          <Property Name="MABAIVIET" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENBAIVIET" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HINHANH" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NOIDUNG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TACGIA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NGAYDANG" Type="DateTime" Precision="3" />
+          <Property Name="MATRANGTHAI" Type="Int32" />
+          <Property Name="MADANHMUC" Type="Int32" />
+          <Property Name="MALOAI" Type="Int32" />
+          <NavigationProperty Name="DANHMUC" Relationship="Self.FK__BAIVIET__MADANHM__33D4B598" FromRole="BAIVIET" ToRole="DANHMUC" />
+          <NavigationProperty Name="LOAIBAIDANG" Relationship="Self.FK__BAIVIET__MALOAI__34C8D9D1" FromRole="BAIVIET" ToRole="LOAIBAIDANG" />
+          <NavigationProperty Name="TRANGTHAIBAIDANG" Relationship="Self.FK__BAIVIET__MATRANG__32E0915F" FromRole="BAIVIET" ToRole="TRANGTHAIBAIDANG" />
+          <NavigationProperty Name="LINKLIENKETs" Relationship="Self.FK__LINKLIENK__MABAI__3C69FB99" FromRole="BAIVIET" ToRole="LINKLIENKET" />
+        </EntityType>
+        <EntityType Name="CHUCVU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENCHUCVU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TAIKHOANs" Relationship="Self.FK__TAIKHOAN__IDCHUC__276EDEB3" FromRole="CHUCVU" ToRole="TAIKHOAN" />
+        </EntityType>
+        <EntityType Name="DANHMUC">
+          <Key>
+            <PropertyRef Name="MADANHMUC" />
+          </Key>
+          <Property Name="MADANHMUC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENDANHMUC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HINHANH" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BAIVIETs" Relationship="Self.FK__BAIVIET__MADANHM__33D4B598" FromRole="DANHMUC" ToRole="BAIVIET" />
+          <NavigationProperty Name="SANPHAMs" Relationship="Self.FK__SANPHAM__MADANHM__2C3393D0" FromRole="DANHMUC" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="DOITAC">
+          <Key>
+            <PropertyRef Name="MADOITAC" />
+          </Key>
+          <Property Name="MADOITAC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENCONGTY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CANHANDAIDIEN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MASOTHUE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="DIACHI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="THOIGIANBATDAU" Type="DateTime" Precision="0" />
+          <Property Name="HOPDONG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PHUONGTHUCTHANHTOAN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SOTAIKHOAN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NGANHANG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TENTAIKHOAN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NGAYTAO" Type="DateTime" Precision="3" />
+          <Property Name="TRANGTHAI" Type="Int32" />
+          <NavigationProperty Name="LINKLIENKETs" Relationship="Self.FK__LINKLIENK__MADOI__3B75D760" FromRole="DOITAC" ToRole="LINKLIENKET" />
+        </EntityType>
+        <EntityType Name="LINKLIENKET">
+          <Key>
+            <PropertyRef Name="IDLINKLIENKET" />
+          </Key>
+          <Property Name="IDLINKLIENKET" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MASANPHAM" Type="Int32" />
+          <Property Name="MADOITAC" Type="Int32" />
+          <Property Name="MABAIVIET" Type="Int32" />
+          <Property Name="LINKLIENKET1" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="TILEHOAHONG" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DOANHTHUBANHANG" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TRANGTHAI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BAIVIET" Relationship="Self.FK__LINKLIENK__MABAI__3C69FB99" FromRole="LINKLIENKET" ToRole="BAIVIET" />
+          <NavigationProperty Name="DOITAC" Relationship="Self.FK__LINKLIENK__MADOI__3B75D760" FromRole="LINKLIENKET" ToRole="DOITAC" />
+          <NavigationProperty Name="SANPHAM" Relationship="Self.FK__LINKLIENK__MASAN__3A81B327" FromRole="LINKLIENKET" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="LOAIBAIDANG">
+          <Key>
+            <PropertyRef Name="MALOAI" />
+          </Key>
+          <Property Name="MALOAI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOAIBAIDANG1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BAIVIETs" Relationship="Self.FK__BAIVIET__MALOAI__34C8D9D1" FromRole="LOAIBAIDANG" ToRole="BAIVIET" />
+        </EntityType>
+        <EntityType Name="SANPHAM">
+          <Key>
+            <PropertyRef Name="MASANPHAM" />
+          </Key>
+          <Property Name="MASANPHAM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENSANPHAM" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MADANHMUC" Type="Int32" />
+          <NavigationProperty Name="DANHMUC" Relationship="Self.FK__SANPHAM__MADANHM__2C3393D0" FromRole="SANPHAM" ToRole="DANHMUC" />
+          <NavigationProperty Name="LINKLIENKETs" Relationship="Self.FK__LINKLIENK__MASAN__3A81B327" FromRole="SANPHAM" ToRole="LINKLIENKET" />
+        </EntityType>
+        <EntityType Name="TAIKHOAN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HOVATEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MATKHAU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDCHUCVU" Type="Int32" />
+          <Property Name="TRANGTHAI" Type="Int32" />
+          <NavigationProperty Name="CHUCVU" Relationship="Self.FK__TAIKHOAN__IDCHUC__276EDEB3" FromRole="TAIKHOAN" ToRole="CHUCVU" />
+        </EntityType>
+        <EntityType Name="TRANGTHAIBAIDANG">
+          <Key>
+            <PropertyRef Name="MATRANGTHAI" />
+          </Key>
+          <Property Name="MATRANGTHAI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TRANGTHAIBAIDANG1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BAIVIETs" Relationship="Self.FK__BAIVIET__MATRANG__32E0915F" FromRole="TRANGTHAIBAIDANG" ToRole="BAIVIET" />
+        </EntityType>
+        <Association Name="FK__BAIVIET__MADANHM__33D4B598">
+          <End Role="DANHMUC" Type="Self.DANHMUC" Multiplicity="0..1" />
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DANHMUC">
+              <PropertyRef Name="MADANHMUC" />
+            </Principal>
+            <Dependent Role="BAIVIET">
+              <PropertyRef Name="MADANHMUC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BAIVIET__MALOAI__34C8D9D1">
+          <End Role="LOAIBAIDANG" Type="Self.LOAIBAIDANG" Multiplicity="0..1" />
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIBAIDANG">
+              <PropertyRef Name="MALOAI" />
+            </Principal>
+            <Dependent Role="BAIVIET">
+              <PropertyRef Name="MALOAI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BAIVIET__MATRANG__32E0915F">
+          <End Role="TRANGTHAIBAIDANG" Type="Self.TRANGTHAIBAIDANG" Multiplicity="0..1" />
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANGTHAIBAIDANG">
+              <PropertyRef Name="MATRANGTHAI" />
+            </Principal>
+            <Dependent Role="BAIVIET">
+              <PropertyRef Name="MATRANGTHAI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LINKLIENK__MABAI__3C69FB99">
+          <End Role="BAIVIET" Type="Self.BAIVIET" Multiplicity="0..1" />
+          <End Role="LINKLIENKET" Type="Self.LINKLIENKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAIVIET">
+              <PropertyRef Name="MABAIVIET" />
+            </Principal>
+            <Dependent Role="LINKLIENKET">
+              <PropertyRef Name="MABAIVIET" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TAIKHOAN__IDCHUC__276EDEB3">
+          <End Role="CHUCVU" Type="Self.CHUCVU" Multiplicity="0..1" />
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUCVU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAIKHOAN">
+              <PropertyRef Name="IDCHUCVU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SANPHAM__MADANHM__2C3393D0">
+          <End Role="DANHMUC" Type="Self.DANHMUC" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DANHMUC">
+              <PropertyRef Name="MADANHMUC" />
+            </Principal>
+            <Dependent Role="SANPHAM">
+              <PropertyRef Name="MADANHMUC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LINKLIENK__MADOI__3B75D760">
+          <End Role="DOITAC" Type="Self.DOITAC" Multiplicity="0..1" />
+          <End Role="LINKLIENKET" Type="Self.LINKLIENKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOITAC">
+              <PropertyRef Name="MADOITAC" />
+            </Principal>
+            <Dependent Role="LINKLIENKET">
+              <PropertyRef Name="MADOITAC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LINKLIENK__MASAN__3A81B327">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="0..1" />
+          <End Role="LINKLIENKET" Type="Self.LINKLIENKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MASANPHAM" />
+            </Principal>
+            <Dependent Role="LINKLIENKET">
+              <PropertyRef Name="MASANPHAM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbReviewDoCongNgheFTECHEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BAIVIETs" EntityType="Self.BAIVIET" />
+          <EntitySet Name="CHUCVUs" EntityType="Self.CHUCVU" />
+          <EntitySet Name="DANHMUCs" EntityType="Self.DANHMUC" />
+          <EntitySet Name="DOITACs" EntityType="Self.DOITAC" />
+          <EntitySet Name="LINKLIENKETs" EntityType="Self.LINKLIENKET" />
+          <EntitySet Name="LOAIBAIDANGs" EntityType="Self.LOAIBAIDANG" />
+          <EntitySet Name="SANPHAMs" EntityType="Self.SANPHAM" />
+          <EntitySet Name="TAIKHOANs" EntityType="Self.TAIKHOAN" />
+          <EntitySet Name="TRANGTHAIBAIDANGs" EntityType="Self.TRANGTHAIBAIDANG" />
+          <AssociationSet Name="FK__BAIVIET__MADANHM__33D4B598" Association="Self.FK__BAIVIET__MADANHM__33D4B598">
+            <End Role="DANHMUC" EntitySet="DANHMUCs" />
+            <End Role="BAIVIET" EntitySet="BAIVIETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BAIVIET__MALOAI__34C8D9D1" Association="Self.FK__BAIVIET__MALOAI__34C8D9D1">
+            <End Role="LOAIBAIDANG" EntitySet="LOAIBAIDANGs" />
+            <End Role="BAIVIET" EntitySet="BAIVIETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BAIVIET__MATRANG__32E0915F" Association="Self.FK__BAIVIET__MATRANG__32E0915F">
+            <End Role="TRANGTHAIBAIDANG" EntitySet="TRANGTHAIBAIDANGs" />
+            <End Role="BAIVIET" EntitySet="BAIVIETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LINKLIENK__MABAI__3C69FB99" Association="Self.FK__LINKLIENK__MABAI__3C69FB99">
+            <End Role="BAIVIET" EntitySet="BAIVIETs" />
+            <End Role="LINKLIENKET" EntitySet="LINKLIENKETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TAIKHOAN__IDCHUC__276EDEB3" Association="Self.FK__TAIKHOAN__IDCHUC__276EDEB3">
+            <End Role="CHUCVU" EntitySet="CHUCVUs" />
+            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SANPHAM__MADANHM__2C3393D0" Association="Self.FK__SANPHAM__MADANHM__2C3393D0">
+            <End Role="DANHMUC" EntitySet="DANHMUCs" />
+            <End Role="SANPHAM" EntitySet="SANPHAMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LINKLIENK__MADOI__3B75D760" Association="Self.FK__LINKLIENK__MADOI__3B75D760">
+            <End Role="DOITAC" EntitySet="DOITACs" />
+            <End Role="LINKLIENKET" EntitySet="LINKLIENKETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LINKLIENK__MASAN__3A81B327" Association="Self.FK__LINKLIENK__MASAN__3A81B327">
+            <End Role="SANPHAM" EntitySet="SANPHAMs" />
+            <End Role="LINKLIENKET" EntitySet="LINKLIENKETs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbReviewDoCongNgheFTECHModelStoreContainer" CdmEntityContainer="dbReviewDoCongNgheFTECHEntities">
+          <EntitySetMapping Name="BAIVIETs">
+            <EntityTypeMapping TypeName="dbReviewDoCongNgheFTECHModel.BAIVIET">
+              <MappingFragment StoreEntitySet="BAIVIET">
+                <ScalarProperty Name="MABAIVIET" ColumnName="MABAIVIET" />
+                <ScalarProperty Name="TENBAIVIET" ColumnName="TENBAIVIET" />
+                <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
+                <ScalarProperty Name="NOIDUNG" ColumnName="NOIDUNG" />
+                <ScalarProperty Name="TACGIA" ColumnName="TACGIA" />
+                <ScalarProperty Name="NGAYDANG" ColumnName="NGAYDANG" />
+                <ScalarProperty Name="MATRANGTHAI" ColumnName="MATRANGTHAI" />
+                <ScalarProperty Name="MADANHMUC" ColumnName="MADANHMUC" />
+                <ScalarProperty Name="MALOAI" ColumnName="MALOAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHUCVUs">
+            <EntityTypeMapping TypeName="dbReviewDoCongNgheFTECHModel.CHUCVU">
+              <MappingFragment StoreEntitySet="CHUCVU">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TENCHUCVU" ColumnName="TENCHUCVU" />
+                <ScalarProperty Name="MOTA" ColumnName="MOTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DANHMUCs">
+            <EntityTypeMapping TypeName="dbReviewDoCongNgheFTECHModel.DANHMUC">
+              <MappingFragment StoreEntitySet="DANHMUC">
+                <ScalarProperty Name="MADANHMUC" ColumnName="MADANHMUC" />
+                <ScalarProperty Name="TENDANHMUC" ColumnName="TENDANHMUC" />
+                <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOITACs">
+            <EntityTypeMapping TypeName="dbReviewDoCongNgheFTECHModel.DOITAC">
+              <MappingFragment StoreEntitySet="DOITAC">
+                <ScalarProperty Name="MADOITAC" ColumnName="MADOITAC" />
+                <ScalarProperty Name="TENCONGTY" ColumnName="TENCONGTY" />
+                <ScalarProperty Name="CANHANDAIDIEN" ColumnName="CANHANDAIDIEN" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="MASOTHUE" ColumnName="MASOTHUE" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="THOIGIANBATDAU" ColumnName="THOIGIANBATDAU" />
+                <ScalarProperty Name="HOPDONG" ColumnName="HOPDONG" />
+                <ScalarProperty Name="PHUONGTHUCTHANHTOAN" ColumnName="PHUONGTHUCTHANHTOAN" />
+                <ScalarProperty Name="SOTAIKHOAN" ColumnName="SOTAIKHOAN" />
+                <ScalarProperty Name="NGANHANG" ColumnName="NGANHANG" />
+                <ScalarProperty Name="TENTAIKHOAN" ColumnName="TENTAIKHOAN" />
+                <ScalarProperty Name="NGAYTAO" ColumnName="NGAYTAO" />
+                <ScalarProperty Name="TRANGTHAI" ColumnName="TRANGTHAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LINKLIENKETs">
+            <EntityTypeMapping TypeName="dbReviewDoCongNgheFTECHModel.LINKLIENKET">
+              <MappingFragment StoreEntitySet="LINKLIENKET">
+                <ScalarProperty Name="IDLINKLIENKET" ColumnName="IDLINKLIENKET" />
+                <ScalarProperty Name="MASANPHAM" ColumnName="MASANPHAM" />
+                <ScalarProperty Name="MADOITAC" ColumnName="MADOITAC" />
+                <ScalarProperty Name="MABAIVIET" ColumnName="MABAIVIET" />
+                <ScalarProperty Name="LINKLIENKET1" ColumnName="LINKLIENKET" />
+                <ScalarProperty Name="TILEHOAHONG" ColumnName="TILEHOAHONG" />
+                <ScalarProperty Name="DOANHTHUBANHANG" ColumnName="DOANHTHUBANHANG" />
+                <ScalarProperty Name="TRANGTHAI" ColumnName="TRANGTHAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAIBAIDANGs">
+            <EntityTypeMapping TypeName="dbReviewDoCongNgheFTECHModel.LOAIBAIDANG">
+              <MappingFragment StoreEntitySet="LOAIBAIDANG">
+                <ScalarProperty Name="MALOAI" ColumnName="MALOAI" />
+                <ScalarProperty Name="LOAIBAIDANG1" ColumnName="LOAIBAIDANG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SANPHAMs">
+            <EntityTypeMapping TypeName="dbReviewDoCongNgheFTECHModel.SANPHAM">
+              <MappingFragment StoreEntitySet="SANPHAM">
+                <ScalarProperty Name="MASANPHAM" ColumnName="MASANPHAM" />
+                <ScalarProperty Name="TENSANPHAM" ColumnName="TENSANPHAM" />
+                <ScalarProperty Name="MADANHMUC" ColumnName="MADANHMUC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAIKHOANs">
+            <EntityTypeMapping TypeName="dbReviewDoCongNgheFTECHModel.TAIKHOAN">
+              <MappingFragment StoreEntitySet="TAIKHOAN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HOVATEN" ColumnName="HOVATEN" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="MATKHAU" ColumnName="MATKHAU" />
+                <ScalarProperty Name="IDCHUCVU" ColumnName="IDCHUCVU" />
+                <ScalarProperty Name="TRANGTHAI" ColumnName="TRANGTHAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANGTHAIBAIDANGs">
+            <EntityTypeMapping TypeName="dbReviewDoCongNgheFTECHModel.TRANGTHAIBAIDANG">
+              <MappingFragment StoreEntitySet="TRANGTHAIBAIDANG">
+                <ScalarProperty Name="MATRANGTHAI" ColumnName="MATRANGTHAI" />
+                <ScalarProperty Name="TRANGTHAIBAIDANG1" ColumnName="TRANGTHAIBAIDANG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

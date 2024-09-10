@@ -1,0 +1,65 @@
+﻿@{
+    //List<FTECH_WebReviewCongNghe.Models.DANHMUC> dsDM = ViewBag.dsDANHMUC;
+    FTECH_WebReviewCongNghe.Models.DANHMUC dm = ViewBag.dm;
+    Layout = "~/Views/Shared/GenericAdminLayout.cshtml";
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cập nhật danh mục</title>
+    <link rel="stylesheet" href="~/MySource/css/add.css">
+</head>
+<body>
+    <h1 class="title_addPr">Cập nhật danh mục</h1>
+    <div class="addPd_container">
+        <div id="bg_add">
+            <img src="~/MySource/img/product/@dm.HINHANH" />
+        </div>
+        <div class="form_add">
+            <form action="~/Admin/updateCategory" method="post" enctype="multipart/form-data">
+                <label for="ma-san-pham">Mã danh mục:</label>
+                <input type="text" id="ma-danh-muc" disabled value="@dm.ID" name="MADANHMUC">
+                <input type="hidden" id="ID" value="@dm.ID" name="ID">
+                <label for="ten-san-pham">Tên danh mục:</label>
+                <input type="text" id="ten-danh-muc" value="@dm.TENDANHMUC" name="TENDANHMUC" required>
+                <label for="hinh-anh">Hình ảnh:</label>
+                <input accept=".jpg, .png, .gif" type="file" id="hinh-anh" name="fileAnh">
+                <button type="button" onclick="uploadImage()">Tải ảnh lên</button>
+                <label for="mo-ta">Mô tả:</label>
+                <textarea id="mo-ta" name="MOTA" rows="5" required>@dm.MOTA</textarea>
+                <div class="addPr_btn">
+                    <a href="~/Admin"><button type="button">Trở về</button></a>
+                    <button type="submit">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    function uploadImage() {
+	  var fileInput = document.getElementById('hinh-anh');
+	  var file = fileInput.files[0];
+	  var imageType = /image.*/;
+
+	  if (file.type.match(imageType)) {
+	    var reader = new FileReader();
+
+	    reader.onload = function(e) {
+	      var img = new Image();
+	      img.src = reader.result;
+	      var imagePreview = document.getElementById('bg_add');
+	      imagePreview.innerHTML = '';
+	      imagePreview.appendChild(img);
+	    }
+
+	    reader.readAsDataURL(file);
+	  }
+	  else {
+	    alert('Chỉ chấp nhận file hình ảnh');
+	  }
+	}
+</script>
+</html>

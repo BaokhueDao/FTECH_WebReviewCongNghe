@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "addAccount";
+    List<FTECH_WebReviewCongNghe.Models.CHUCVU> dsCV = ViewBag.dsChucVu;
+    List<FTECH_WebReviewCongNghe.Models.TAIKHOAN> dstk = ViewBag.dsTAIKHOAN;
+    FTECH_WebReviewCongNghe.Models.TAIKHOAN tk = ViewBag.tk;
+    Layout = "~/Views/Shared/GenericAdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm tài khoản</title>
+    <link rel="stylesheet" href="~/MySource/css/add2.css">
+
+</head>
+<body>
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Quản lý tài khoản > Thêm tài khoản
+        <!-- Các phần tử bên trong thẻ card -->
+    </div>
+    <h1 class="title_addPr">THÊM TÀI KHOẢN</h1>
+    <div class="container">
+        <div class="addPd_container2">
+            <div class="form_add">
+                <form action="~/Admin/addAccount" method="post" enctype="multipart/form-data">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="EMAIL" required>
+                    <label for="mat-khau">Mật khẩu:</label>
+                    <input type="text" id="mat-khau" name="MATKHAU" required>
+                    <label for="ten-nguoi-dung">Tên người dùng:</label>
+                    <input type="text" id="ten-nguoi-dung" name="HOVATEN" required>
+                    <label for="ten-nguoi-dung">Chức vụ:</label>
+                    <select id="danh-muc" name="IDCHUCVU" required>
+                        <option value="">Chọn chức vụ</option>
+                        @{
+                            foreach (var cv in dsCV)
+                            {
+                                <option @(tk.IDCHUCVU == cv.ID ? "selected" : null) value="@cv.ID">@cv.TENCHUCVU</option>
+                            }
+                        }
+                    </select>
+                    <div class="addPr_btn">
+                        <a href="~/home"><button type="button">Trở về</button></a>
+                        <button type="submit">Thêm mới</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

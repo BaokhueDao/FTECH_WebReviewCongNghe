@@ -1,0 +1,119 @@
+﻿@{ FTECH_WebReviewCongNghe.Models.TAIKHOAN tk = (FTECH_WebReviewCongNghe.Models.TAIKHOAN)Session["account"]; }
+@{ 
+    ViewBag.Title = "detailPartner";
+    Layout = null;
+    List<FTECH_WebReviewCongNghe.Models.DOITAC> dsDT = ViewBag.dsDoiTac;
+    FTECH_WebReviewCongNghe.Models.DOITAC dt = ViewBag.dt;
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Thông tin chi tiết</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/MySource/admin/vendor/fontawesome-free-6.5.2-web/fontawesome-free-6.5.2-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/MySource/admin/css/content-admin.min.css" rel="stylesheet">
+    <link href="~/MySource/admin/css/stylepn.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/MySource/css/add2.css">
+</head>
+<body>
+    <div id="wrapper" style="background-color:#fff">
+        <ul class="sidebar navbar-nav">
+            <img src="~/MySource/img/logo.jpg"> <!-- Hình ảnh mặc định -->
+            <li class="nav-item" style="text-align: center; margin-bottom:15px" ">
+                <a class="nav-link avt" href="~/MySource/admin/#" id="userDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <img src="~/MySource/img/avt.jpg" class="avatar" alt="Avatar" style="width: 50px; height: 50px; float: left; margin-right: 10px; border-radius: 50%;">
+                    <div style="float: left;">
+                        <span class="name" style="display: block; font-weight: bold; ">@tk.HOVATEN</span>
+                        <span class="job" style="font-size: smaller;">@tk.CHUCVU.TENCHUCVU</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item" style="background-color: #CEE2F5;">
+                <a class="nav-link" href="~/Admin/PartnerManage">
+                    <i class="fa-solid fa-file" style="color: #121212;"></i>
+                    <span style="color: #121212;font-weight: 500;">Quản lý đối tác liên kết</span>
+                </a>
+            </li>
+            <li class="nav-item @(ViewBag.Title == " addPartner"?"active":null)">
+                <a class="nav-link" href="~/Admin/addPartner">
+                    <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+                    <span>Thêm đối tác</span>
+                </a>
+            </li>
+          
+        </ul>
+
+        <div id="content-wrapper" style="color:#0A5DA9 ;">
+            <div class="container-fluid">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fa-solid fa-bars"></i>
+                        <a href="~/Admin/Index" style="text-decoration: none; color: #0A5DA9">
+                            Quản lý
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="~/Admin/PartnerManage" style="text-decoration: none; color: #0A5DA9">
+                            Đối tác liên kết
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a>
+                            Thông tin chi tiết
+                        </a>
+                    </div>
+                    <h1 class="title_addPr" style="margin-top:30px">THÔNG TIN ĐỐI TÁC</h1>
+                    <div class="container">
+                        <div class="addPd_container2">
+                            <div class="form_add" style="font-size:16px">
+                                <form action="~/Admin/detailPartner" method="post" enctype="multipart/form-data">
+                                    <label for="ma-doi-tac">Mã đối tác</label>
+                                    <input type="text" id="ma-doi-tac" style="font-size:16px" disabled value="@dt.MADOITAC" name="MADOITAC">
+                                    <input type="hidden" id="MADOITAC" value="@dt.MADOITAC" name="MADOITAC">
+                                    <label for="tencongty">Tên công ty</label>
+                                    <input type="text" id="ten-cong-ty" style="font-size:16px" disabled value="@dt.TENCONGTY" name="TENCONGTY" required>
+                                    <label for="canhandaidien">Cá nhân đại diện</label>
+                                    <input type="text" id="ca-nhan-dai-dien" style="font-size:16px" disabled value="@dt.CANHANDAIDIEN" name="CANHANDAIDIEN" required>
+                                    <label for="sodienthoai">Số điện thoại</label>
+                                    <input type="text" id="so-dien-thoai" style="font-size:16px" disabled value="@dt.SDT" name="SDT" required>
+                                    <label for="Email">Email:</label>
+                                    <input type="text" id="Email" style="font-size:16px" disabled value="@dt.EMAIL" name="EMAIL" required>
+                                    <label for="masothue">Mã số thuế</label>
+                                    <input type="text" id="ma-so-thue" style="font-size:16px" disabled value="@dt.MASOTHUE" name="MASOTHUE" required>
+                                    <label for="diachi">Địa chỉ</label>
+                                    <input type="text" id="dia-chi" style="font-size:16px" disabled value="@dt.DIACHI" name="DIACHI" required>
+                                    <label for="thoigianbatdau">Thời gian bắt đầu</label>
+                                    <input type="text" id="thoi-gian-bat-dau" style="font-size:16px" disabled value="@dt.THOIGIANBATDAU" name="THOIGIANBATDAU" required>
+                                    <label for="hinh-anh">Hợp đồng</label>
+                                    <input accept=".pdf" type="text" id="hop-dong" disabled value="@dt.HOPDONG" name="fileHopDong">
+                                    <label for="phuongthucthanhtoan">Phương thức thanh toán</label>
+                                    <input type="text" id="phuong-thuc-thanh-toan" style="font-size:16px" disabled value="@dt.PHUONGTHUCTHANHTOAN" name="PHUONGTHUCTHANHTOAN" required>
+                                    <label for="sotaikhoan">Số tài khoản</label>
+                                    <input type="text" id="so-tai-khoan" style="font-size:16px" disabled value="@dt.SOTAIKHOAN" name="SOTAIKHOAN" required>
+                                    <label for="nganhang">Ngân hàng</label>
+                                    <input type="text" id="ngan-hang" style="font-size:16px" disabled value="@dt.NGANHANG" name="NGANHANG" required>
+                                    <label for="tentaikhoan">Tên tài khoản</label>
+                                    <input type="text" id="ten-tai-khoan" style="font-size:16px" disabled value="@dt.TENTAIKHOAN" name="TENTAIKHOAN" required>
+                                    <div class="addPr_btn" style="justify-content:center;">
+                                                                               
+                                        <a href="~/Admin/PartnerManage"><button type="button">Trở về</button></a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,154 @@
+﻿@{ FTECH_WebReviewCongNghe.Models.TAIKHOAN tk = (FTECH_WebReviewCongNghe.Models.TAIKHOAN)Session["account"]; }
+@{
+    ViewBag.Title = "PartnerManage";
+    Layout = null;
+    List<FTECH_WebReviewCongNghe.Models.DOITAC> dsDT = ViewBag.dsDoitac;
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Quản lý đối tác liên kết</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/MySource/admin/vendor/fontawesome-free-6.5.2-web/fontawesome-free-6.5.2-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/MySource/admin/css/content-admin.min.css" rel="stylesheet">
+
+    <script>
+        function confirmDelete() {
+            return confirm("Bạn có chắc chắn muốn xóa đối tác này không?");
+        }
+    </script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <ul class="sidebar navbar-nav">
+            <img src="~/MySource/img/logo.jpg"> <!-- Hình ảnh mặc định -->
+            <li class="nav-item" style="text-align: center; margin-bottom:15px" ">
+                <a class="nav-link avt" href="~/MySource/admin/#" id="userDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <img src="~/MySource/img/avt.jpg" class="avatar" alt="Avatar" style="width: 50px; height: 50px; float: left; justify-content: center; border-radius: 50%;">
+                    <div style="float: left;">
+                        <span class="name" style="display: block; font-weight: bold; ">@tk.HOVATEN</span>
+                        <span class="job" style="font-size: smaller;">@tk.CHUCVU.TENCHUCVU</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item" style="background-color: #CEE2F5;">
+                <a class="nav-link" href="~/Admin/PartnerManage">
+                    <i class="fa-solid fa-file" style="color: #121212;"></i>
+                    <span style="color: #121212;font-weight: 500;">Quản lý đối tác liên kết</span>
+                </a>
+            </li>
+            <li class="nav-item @(ViewBag.Title == " addPartner"?"active":null)">
+                <a class="nav-link" href="~/Admin/addPartner">
+                    <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+                    <span>Thêm đối tác</span>
+                </a>
+            </li>
+                      
+        </ul>
+
+        <div id="content-wrapper" style="margin: 10px;color:#0A5DA9 ;">
+            <div class="container-fluid">
+                <div class="card mb-3">
+                    <div class="card-header" >
+                        <i class="fa-solid fa-bars"></i>
+                        <a href="~/Admin/Index" style="text-decoration: none; color: #0A5DA9">
+                            Quản lý
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a>
+                            Quản lý đối tác
+                        </a>
+                    </div>
+                    <section class="hero" style="margin-top: 30px;">
+                        <div class="container2">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="hero__search">
+                                        <div class="hero__search__form">
+                                            <form action="~/Home" method="get">
+                                                <input type="text" name="txtSearch" value="@ViewBag.txtSearch" placeholder="Nhập từ khóa tìm kiếm" style="width:400px;border:solid 3px black">
+                                                <button type="submit" class="site-btn" style="background-color:#003366; color:#fff">TÌM</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+                    <div class="card-body">
+                        <div id="tableRes" class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th style="width:70px; text-align:center;">ID</th>
+                                        <th style="width: 230px; text-align: center;">Tên công ty</th>
+                                        <th style="width:200px; text-align:center;">Email</th>
+                                        <th style="width:250px; text-align:center;">Địa chỉ</th>
+                                        <th style="width:100px; text-align:center;">Mã số thuế</th>
+                                        <th style="text-align: center; width: 160px;">Trạng thái</th>
+                                        <th colspan="3" style="width:130px; text-align:center;">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var i in dsDT)
+                                    {
+
+
+                                    <tr @(i.TRANGTHAI == 0 ? "style=background:burlywood;" : "") id="@i.MADOITAC">
+                                        <td style="text-align: center;">@i.MADOITAC</td>
+                                        <td style="text-align: center;">@i.TENCONGTY</td>
+                                        <td style="text-align: center;">@i.EMAIL</td>
+                                        <td style="text-align: center;">@i.DIACHI</td>
+                                        <td style="text-align: center;">@i.MASOTHUE</td>
+                                        <td style="text-align: center;" id="col_status_@i.MADOITAC">@(i.TRANGTHAI == 1 ? "Đang hoạt động": "Đang bị khoá")</td>
+
+                                        <td style="text-align:center;"><a href="~/Admin/updatePartner?ID=@i.MADOITAC"><button style="width:40px; height:40px" class="btnUpdate"><i class="fas fa-redo" style="color: #51e53a;"></i></button></a></td>
+                                        <td style="text-align:center;"><a href="~/Admin/detailPartner?ID=@i.MADOITAC"><button style="width:40px; height:40px" class="btnDetail"><i class="fas fa-info-circle" style="color: #7ac7d3;"></i></button></a></td>
+                                        <td style="text-align:center;">
+                                            <form action="~/Admin/deletePartner" method="post" style="display:inline"; onsubmit=" return confirmDelete();">
+                                                <input type="hidden" name="ID" value="@i.MADOITAC" />
+                                                <button type="submit" style="width:40px; height:40px" class="btnDelete"> <i class="fas fa-trash" style="color: #ff0000;"></i></button>
+                                            </form>
+                                        </td>
+
+
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script src="123/js/jquery-3.3.1.min.js"></script>
+        <script src="123/js/bootstrap.min.js"></script>
+        <script src="123/js/jquery-ui.min.js"></script>
+        <script src="123/js/jquery.nice-select.min.js"></script>
+        <script src="123/js/jquery.slicknav.js"></script>
+        <script src="123/js/mixitup.min.js"></script>
+        <script src="123/js/owl.carousel.min.js"></script>
+        <script src="123/js/main.js"></script>
+        <script src="123/js/sweetalert2.min.js"></script>
+        
+</body>
+</html>
+
+
+

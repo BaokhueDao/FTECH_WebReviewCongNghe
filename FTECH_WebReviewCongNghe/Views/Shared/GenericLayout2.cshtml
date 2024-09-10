@@ -1,0 +1,204 @@
+﻿@{
+    FTECH_WebReviewCongNghe.Models.TAIKHOAN account = (FTECH_WebReviewCongNghe.Models.TAIKHOAN)Session["account"];
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Css Styles -->
+    <link href="~/MySource/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/MySource/css/elegant-icons.css" rel="stylesheet" />
+    <link href="~/MySource/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/MySource/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/MySource/css/nice-select.css" rel="stylesheet" />
+    <link href="~/MySource/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/MySource/css/slicknav.min.css" rel="stylesheet" />
+    <link href="~/MySource/css/stylecss.css" rel="stylesheet" />
+    <link href="~/MySource/css/sweetalert2.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li style="font-size:18px;"><i class="fa fa-envelope"></i>fivetechcoffee@gmail.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+
+                            <div style="display:inline-flex;" class="header__top__right__auth">
+                                @if (Session["account"] == null)
+                                {
+
+                                    <a class="signup" style="margin-right:15px; color:#fff; font-size:18px" href="~/Login/signup"><i class="fa fa-user"></i>Đăng ký</a>}
+                                @if (Session["account"] != null)
+                                {
+                                    <div class="header__top__right__language">
+                                        <div>@account.HOVATEN</div>
+                                        <span class="arrow_carrot-down"></span>
+                                        <ul style="width:160px;">
+                                            @if (account.CHUCVU.TENCHUCVU.Equals("ADMIN"))
+                                            {
+                                                <li><a href="~/Admin">Quản lý</a></li>
+                                            }
+                                            <li><a href="~/Login/logout">Đăng xuất</a></li>
+                                        </ul>
+                                    </div>}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="font-family:Arial;">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a href="~/home"><img src="~/MySource/img/FTECH.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="header__menu">
+                        <ul style=" display: flex; justify-content: center;">
+                            <li @Html.Raw(ViewBag.Title == "home" ? "class='active'" : null)><a href="~/Home">Trang chủ</a></li>
+                            <li @Html.Raw(ViewBag.Title == "cart" ? "class='active'" : null)><a href="~/Cart/">Giới thiệu</a></li>
+                            <li @Html.Raw(ViewBag.Title == "Contact" ? "class='active'" : null)><a href="~/Home/Contact">Liên hệ</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    @RenderBody()
+
+
+    <!-- Footer Section Begin -->
+    <footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="./index.html"><img src="~/MySource/img/FTECH.png" alt=""></a>
+                        </div>
+                        <ul>
+                            <li>Địa chỉ: 48 Cao Thắng, Hải Châu, ĐN</li>
+                            <li>Điện thoại: 0905.123.456</li>
+                            <li>Email: fivetechcoffee@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                        <h6>Trợ giúp</h6>
+                        <ul>
+                            <li><a href="#">Về chúng tôi</a></li>
+                            <li><a href="#">Về cửa hàng</a></li>
+                            <li><a href="#">An toàn mua sắm</a></li>
+                            <li><a href="#">Thông tin vận chuyển</a></li>
+                            <li><a href="#">Chính sách</a></li>
+                            <li><a href="#">Bản đồ</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Chúng tôi là ai</a></li>
+                            <li><a href="#">Dịch cụ của chúng tôi</a></li>
+                            <li><a href="#">Dự án</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="#">Cải tiến</a></li>
+                            <li><a href="#">Chứng thực</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer__widget">
+                        <h6>Tham gia cùng Five Tech ngay bây giờ!</h6>
+                        <p>Nhận thông tin cập nhật qua Email về cửa hàng mới nhất của chúng tôi và các ưu đãi đặc biệt.</p>
+                        <form action="#">
+                            <input type="text" placeholder="Nhập email của bạn">
+                            <button type="submit" class="site-btn">Đăng kí</button>
+                        </form>
+                        <div class="footer__widget__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text">
+                            <p>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
+                        <div class="footer__copyright__payment"><img src="~/MySource/img/payment-item.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+    <!-- Js Plugins -->
+
+    <script src="~/MySource/js/jquery-3.3.1.min.js"></script>
+    <script src="~/MySource/js/bootstrap.min.js"></script>
+    <script src="~/MySource/js/jquery-ui.min.js"></script>
+    <script src="~/MySource/js/jquery.nice-select.min.js"></script>
+    <script src="~/MySource/js/jquery.slicknav.js"></script>
+    <script src="~/MySource/js/mixitup.min.js"></script>
+    <script src="~/MySource/js/owl.carousel.min.js"></script>
+    <script src="~/MySource/js/main.js"></script>
+    <script src="~/MySource/js/sweetalert2.min.js"></script>
+
+
+
+</body>
+
+</html>

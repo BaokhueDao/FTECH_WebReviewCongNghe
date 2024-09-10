@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "AccountManage";
+    Layout = "~/Views/Shared/GenericAdminLayout.cshtml";
+    List<FTECH_WebReviewCongNghe.Models.TAIKHOAN> dsTK = ViewBag.dsTaiKhoan;
+
+    String urlDelete = "/Admin/deleteAccount";
+    String urlUnKey = "/Admin/unKeyAccount";
+}
+<!-- DataTables Example -->
+<head>   
+    
+</head>
+
+<div class="card-header">
+    <i class="fas fa-table"></i>
+    Quản lý tài khoản
+    <!-- Các phần tử bên trong thẻ card -->
+</div>
+<!-- Hero Section Begin -->
+<section class="hero2">
+    <div class="container2">
+        <div class="row">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="~/Home" method="get">
+                            <input type="text" name="txtSearch" value="@ViewBag.txtSearch" placeholder="Nhập từ khóa tìm kiếm">
+                            <button type="submit" class="site-btn">TÌM</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+</div>
+<div class="nav-item @(ViewBag.Title == "addAccount" ? "active" : null)">
+    <a class="nav-link" href="~/Admin/addAccount">
+        <button>Thêm tài khoản</button>
+    </a>
+</div>
+<div class="card-body">
+    <div id="tableRes" class="table-responsive">
+        <table class="table table-bordered" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th style="width:70px; text-align:center;">ID</th>
+                    <th style="width:230px;">Email</th>
+                    <th style="width:200px; text-align:center;">Mật khẩu</th>
+                    <th style="width:250px; text-align:center;">Họ và tên</th>
+                    <th style="width:100px; text-align:center;">Chức vụ</th>
+                    <th style="text-align: center; width: 160px;">Trạng thái</th>
+                    <th colspan="2" style="width:130px; text-align:center;">Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in dsTK)
+                {
+                    <tr @(i.TRANGTHAI == 0 ? "style=background:burlywood;" : null) id="account_@i.ID">
+                        <td style="text-align:center;">@i.ID</td>
+                        <td>@i.EMAIL</td>
+                        <td style="text-align:center;">@i.MATKHAU</td>
+                        <td style="text-align:center;">@i.HOVATEN</td>
+                        <td style="text-align:center;">@i.CHUCVU.TENCHUCVU</td>
+                        <td style="text-align:center;" id="col_status_@i.ID">@(i.TRANGTHAI == 1 ? "Đang hoạt động": "Đang bị khoá")</td>
+                        @if (i.TRANGTHAI == 1)
+                        {
+                            <td style="text-align:center;" id="btnDeleteOrUnKey_@i.ID"><button onclick="deleteAccount(@i.ID)" style="width:60px;" class="btnDelete">Khoá</button></td>
+                        }
+                        else
+                        {
+                            <td style="text-align:center;" id="btnDeleteOrUnKey_@i.ID"><button onclick="unKeyAccount(@i.ID)" style="width: 60px; color: white; background: green; " class="btnUnKey">Mở</button></td>
+                        }
+                        <td style="text-align:center;"><a href="~/Admin/updateAccount?ID=@i.ID"><button style="width:60px;" class="btnUpdate">Sửa</button></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+<script>
+    function unKeyAccount(id) {
+        changeAccount("UnKey", id);
+        $.ajax({
+            url: '@urlUnKey',
+            type: 'POST',
+            data: {
+                ID : id
+            },
+            success: function () {
+                alert("đúng");
+                swal("Thành công!", "Mở khoá thành công", "success").then(function (isConfirm) {
+                    if (isConfirm.value == true) {
+                    }
+                })
+            },
+            error: function () {
+                alert("sai");
+                swal("Thất bại!", "Mở khoá thất bại", "error").then(function (isConfirm) {
+                    if (isConfirm.value == true) {
+                    }
+                })
+            }
+        })
+    }
+    function deleteAccount(id) {
+        changeAccount("Delete", id);
+        $.ajax({
+            url: '@urlDelete',
+            type: 'POST',
+            data: {
+                ID: id
+            },
+            success: function () {
+                alert("đúng");
+                swal("Thành công!", "Khoá thành công", "success").then(function (isConfirm) {
+                    if (isConfirm.value == true) {
+                    }
+                })
+            },
+            error: function () {
+                alert("sai");
+                swal("Thất bại!", "Vô hiệu hoá thất bại", "error").then(function (isConfirm) {
+                    if (isConfirm.value == true) {
+                    }
+                })
+            }
+        })
+    }
+    function changeAccount(action,id) {
+        if (action == "Delete") {
+            var RowAccount = document.getElementById("account_" + id);
+            var ColStatus = document.getElementById("col_status_" + id);
+            var btn_delete = document.getElementById("btnDeleteOrUnKey_" + id);
+            RowAccount.style.background = "burlywood";
+            btn_delete.innerHTML = '<button onclick="unKeyAccount(' + id + ')" style="width: 60px; color: white; background: green; " class="btnUnKey">Mở</button>';
+            ColStatus.innerHTML = "Đang bị khoá";
+        } else if (action == "UnKey") {
+            var RowAccount = document.getElementById("account_" + id);
+            var ColStatus = document.getElementById("col_status_" + id);
+            var btnUnKey = document.getElementById("btnDeleteOrUnKey_" + id);
+            RowAccount.style.removeProperty("background");
+            btnUnKey.innerHTML = '<button onclick="deleteAccount(' + id + ')" style="width:60px;" class="btnDelete">Khoá</button>';
+            ColStatus.innerHTML = 'Đang hoạt động';
+        }
+    }
+</script>

@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "detail";
+    int? MDM = ViewBag.MDM;
+    FTECH_WebReviewCongNghe.Models.BAIVIET bv = ViewBag.bv;
+    Layout = "~/Views/Shared/GenericLayout.cshtml";
+    FTECH_WebReviewCongNghe.Models.PageRS pageRS = ViewBag.pageRS;
+    IEnumerable<FTECH_WebReviewCongNghe.Models.DANHMUC> dsDM = ViewBag.dsDANHMUC;
+}
+<!-- Breadcrumb Section Begin -->
+
+<section>
+    <div class="categories__slider owl-carousel">
+
+
+        @{ foreach (var item in ViewBag.BAIVIETCungDanhMucTop4)
+            {
+                <div class="col-lg-3">
+                    <div class="categories__item set-bg" data-setbg="../MySource/img/product/@item.HINHANH" onclick="redirectToItemDetail(@item.MABAIVIET)">
+                        <h5><a>@item.TENBAIVIET</a></h5>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</section>
+
+<!-- Breadcrumb Section End -->
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>DANH MỤC BÀI VIẾT</span>
+                    </div>
+                    <ul>
+
+                        @foreach (var item in dsDM)
+                        {
+                            <li>
+                                <a href="#">@item.TENDANHMUC</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+                <div class="blog__sidebar__item">
+                    <h4 style=" margin-top: 30px">Thông tin liên quan</h4>
+                    <div class="blog__sidebar__recent">
+                        <ul>
+
+                            @foreach (var item in ViewBag.BAIVIETCungDanhMuc)
+                            {
+                                <li onclick="redirectToItemDetail(@item.MABAIVIET)">
+                                    <h5><a>@item.TENBAIVIET</a></h5>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__item">
+                        <img class="product__details__pic__item--large"
+                             src="~/MySource/img/product/@bv.HINHANH" alt="@bv.TENBAIVIET">
+                    </div>
+                </div>
+                <div class="product__details__text">
+                    <h3>@bv.TENBAIVIET</h3>
+                    <div class="related-links">
+                        <h4 style=" color : #003366">Mua ngay tại</h4>
+                        @foreach (var item in ViewBag.linkCungBaiViet)
+                        {
+                            <a href="@item.LINKLIENKET1" target="_blank">@item.LINKLIENKET1</a>
+                            <br />
+                        }
+                    </div>
+                    <p>
+                        @bv.NOIDUNG
+                    </p>
+                    <p style="color: #003366; text-align: right ">
+                        Tác giả: @bv.TACGIA
+                    </p>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function redirectToItemDetail(itemId) {
+        // Construct the URL for the item detail page
+        var itemDetailUrl = '@Url.Action("itemDetail", "Home")' + '?MABAIVIET=' + itemId;
+
+        // Navigate to the item detail page
+        window.location.href = itemDetailUrl;
+    }
+</script>
+
+
+
+
+
+

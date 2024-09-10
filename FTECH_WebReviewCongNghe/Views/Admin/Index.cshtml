@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/GenericAdminLayout.cshtml";
+    FTECH_WebReviewCongNghe.Models.PageRS pageRS = ViewBag.pageRS;
+    String urlDelete = "/Admin/deleteProduct";
+}
+<!-- DataTables Example -->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Quản lý sản phẩm
+    </div>
+    <div class="nav-item @(ViewBag.Title == "addProduct"?"active":null)">
+        <a class="nav-link" href="~/Admin/addProduct">
+            <button>Thêm sản phẩm</button>
+        </a>
+    </div>
+    <div class="card-body">
+        <div id="tableRes" class="table-responsive">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="width:126px; text-align:center;">Mã sản phẩm</th>
+                        <th style="width:350px;">Tên sản phẩm</th>
+                        <th style="width:130px; text-align:center;">Mã danh mục</th>
+                        <th colspan="2" style="width:130px; text-align:center;">Chức năng</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{
+                        foreach (var i in pageRS.DsSP)
+                        {
+                            <tr>
+                                <td style="text-align:center;">@i.MASANPHAM</td>
+                                <td>@i.TENSANPHAM</td>
+
+                                <td style="text-align:center;">@i.MADANHMUC</td>
+                                <td style="text-align:center;"><button class="btnDelete" onclick="deleteProduct(@i.MASANPHAM)">Xoá</button></td>
+                                <td style="text-align:center;"><a href="~/Admin/updateProduct?MASANPHAM=@i.MASANPHAM"><button class="btnUpdate">Sửa</button></a></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div style="justify-content: center;display: flex; margin-top:15px; " class="product__pagination">
+                @{
+                    if (pageRS.Vitri > 1)
+                    {
+                        <a href="/Admin?index=@(pageRS.Vitri-1)"><i class="fa fa-long-arrow-left"></i></a>
+                    }
+                }
+                @{
+                    for (int i = 1; i <= pageRS.SoLuongTrang; i++)
+                    {
+                        <a @(pageRS.Vitri == i ? "style=background-color:#ce953c;color:white;" : null) href="/Admin?index=@i">@i</a>
+                    }
+                }
+                @{
+                    if (pageRS.Vitri < pageRS.SoLuongTrang)
+                    {
+                        <a href="/Admin?index=@(pageRS.Vitri+1)"><i class="fa fa-long-arrow-right"></i></a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <script>
+        function deleteProduct(masp) {
+            $.ajax({
+                url: '@urlDelete',
+                type: 'POST',
+                data: {
+                    MASANPHAM: masp
+                },
+                success: function () {
+                    location.reload()
+                },
+                error: function () {
+                    console.log("ERROR")
+                }
+            });
+        };
+    </script>
+</div>
+
+
+

@@ -1,0 +1,60 @@
+﻿
+@{
+    List<FTECH_WebReviewCongNghe.Models.CHUCVU> dsCV = ViewBag.dsChucVu;
+    Layout = "~/Views/Shared/GenericAdminLayout.cshtml";
+    FTECH_WebReviewCongNghe.Models.TAIKHOAN tk = ViewBag.tk;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cập nhật tài khoản</title>
+    <link rel="stylesheet" href="~/MySource/css/add2.css">
+</head>
+<body>
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Quản lý tài khoản > Cập nhật tài khoản
+        <!-- Các phần tử bên trong thẻ card -->
+    </div>
+    <h1 class="title_addPr">CẬP NHẬT TÀI KHOẢN</h1>
+    <div class="addPd_container2">
+        <div class="container">
+            <div class="form_add">
+                <form action="~/Admin/updateAccount" method="post" enctype="multipart/form-data">
+                    <label for="ma-tai-khoan">ID</label>
+                    <input type="text" id="ma-tai-khoan" disabled value="@tk.ID" name="ID">
+                    <input type="hidden" id="ID" value="@tk.ID" name="ID">
+                    <label for="Email">Email:</label>
+                    <input type="text" id="Email" disabled value="@tk.EMAIL" name="EMAIL" required>
+                    <label for="mat-khau">Mật khẩu:</label>
+                    <input type="text" id="Email" disabled value="@tk.HOVATEN" name="HOVATEN" required>
+                    <label for="mat-khau">Họ và tên:</label>
+                    <input type="text" id="mat-khau" value="@tk.MATKHAU" name="MATKHAU" required>
+                    <label for="danh-muc">Chức vụ:</label>
+                    <select id="danh-muc" name="IDCHUCVU" required>
+                        <option value="">Chọn chức vụ</option>
+                        @{
+                            foreach (var cv in dsCV)
+                            {
+                                <option @(tk.IDCHUCVU == cv.ID ? "selected" : null) value="@cv.ID">@cv.TENCHUCVU</option>
+                            }
+                        }
+                    </select>
+                    <div class="addPr_btn">
+                        <a href="~/Admin/AccountManage"><button type="button">Trở về</button></a>
+                        <button type="submit">Xác nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>
+
+
+

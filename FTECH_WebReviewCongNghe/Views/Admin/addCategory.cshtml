@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "addCategory";
+    List<FTECH_WebReviewCongNghe.Models.CHUCVU> dsCV = ViewBag.dsChucVu;
+    List<FTECH_WebReviewCongNghe.Models.TAIKHOAN> dstk = ViewBag.dsTAIKHOAN;
+    FTECH_WebReviewCongNghe.Models.TAIKHOAN tk = ViewBag.tk;
+    Layout = "~/Views/Shared/GenericAdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm tài khoản</title>
+    <link rel="stylesheet" href="~/MySource/css/style4.css">
+
+</head>
+<body>
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Quản lý liên kết > Thêm liên kết
+        <!-- Các phần tử bên trong thẻ card -->
+    </div>
+    <h1 class="title_addPr">THÊM LIÊN KẾT</h1>
+    <div class="container">
+        <div class="addPd_container2">
+            <div class="form_add">
+                <form action="~/Admin/addACategory" method="post" enctype="multipart/form-data">
+                    <label for="email">Tên đối tác:</label>
+                    <input type="text" id="email" name="EMAIL" required>
+                    <label for="mat-khau">Link sản phẩn:</label>
+                    <input type="text" id="mat-khau" name="MATKHAU" required>
+                    <label for="ten-nguoi-dung">Tỉ lệ hoa hồng:</label>
+                    <input type="text" id="ten-nguoi-dung" name="HOVATEN" required>
+                    <label for="ten-nguoi-dung">Doanh thu:</label>
+                    <input type="text" id="ten-nguoi-dung" name="HOVATEN" required>
+                    <label for="ten-nguoi-dung">Trạng thái:</label>
+                    <select id="danh-muc" name="IDCHUCVU" required>
+                        <option value="">Chọn chức vụ</option>
+
+                    </select>
+                    <div class="addPr_btn">
+                        <a href="~/home"><button type="button">Trở về</button></a>
+                        <button type="submit">Thêm mới</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

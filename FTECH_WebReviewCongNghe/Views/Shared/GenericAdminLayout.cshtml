@@ -1,0 +1,106 @@
+﻿@{ FTECH_WebReviewCongNghe.Models.TAIKHOAN tk = (FTECH_WebReviewCongNghe.Models.TAIKHOAN)Session["account"]; }
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Quản lý</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/MySource/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/MySource/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/MySource/css/style.css" rel="stylesheet" />
+    <link href="~/MySource/admin/css/style1.css" rel="stylesheet">
+    <link href="~/MySource/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/MySource/css/sweetalert2.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template-->
+    <link href="~/MySource/admin/css/sb-admin2.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+
+
+    <div id="wrapper">
+        <ul class="sidebar navbar-nav">
+            <img src="~/MySource/img/logo.jpg" class="nav-item" alt="Avatar" style="float: left; height: 65px;"> <!-- Hình ảnh mặc định -->
+            <div style="clear:both; border-bottom: 1px solid #ffffff; margin-bottom: 10px;"></div> <!-- Đường gạch ngang màu trắng -->
+            <li class="nav-item @(ViewBag.Title == "Home" ? "active" : null)" style="text-align: center; margin-top:-20px; margin-bottom: 5px;">
+                <a class="nav-link avt" href="~/MySource/admin/#" id="userDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <img src="~/MySource/img/avt.jpg" class="avatar" alt="Avatar" style="width: 50px; height: 50px; float: left; margin-right: 10px; border-radius: 50%;">
+                    <div style="float: left;">
+                        <span class="name" style="display: block; font-weight: bold; margin-bottom: 5px;">@tk.HOVATEN</span>
+                        <span class="job" style="font-size: smaller;">@tk.CHUCVU.TENCHUCVU</span>
+                    </div>
+                </a>
+            </li>
+
+            <li class="nav-item @(ViewBag.Title == "AccountManage"?"active":null)">
+                <a class="nav-link" href="~/Admin/AccountManage">
+                    <span>Quản lý tài khoản</span>
+                </a>
+            </li>
+            <li class="nav-item @(ViewBag.Title == "Home"?"active":null)">
+                <a class="nav-link" href="~/Admin/PostManage">
+                    <span>Quản lý bài đăng</span>
+                </a>
+            </li>
+            <li class="nav-item @(ViewBag.Title == "PartnerManage"?"active":null)">
+                <a class="nav-link" href="~/Admin/PartnerManage">
+                    <span>Quản lý đối tác</span>
+                </a>
+            </li>
+            <li class="nav-item @(ViewBag.Title == "CategoryManage"?"active":null)">
+                <a class="nav-link" href="~/Admin/categoryManage">
+                    <span>Quản lý liên kết</span>
+                </a>
+            </li>
+            <li class="nav-item @(ViewBag.Title == "CategoryManage"?"active":null)">
+                <a class="nav-link" href="~/Admin/categoryManage">
+                    <span>Thống kê</span>
+                </a>
+            </li>
+            <li class="nav-item @(ViewBag.Title == "CategoryManage"?"active":null)">
+                <a class="nav-link" href="~/Login/logout">
+                    <span>Đăng xuất</span>
+                </a>
+            </li>
+
+
+        </ul>
+
+        <div id="content-wrapper">
+
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/MySource/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="~/MySource/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/MySource/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/MySource/admin/js/sb-admin.min.js"></script>
+    <script src="~/MySource/js/sweetalert2.min.js"></script>
+
+</body>
+
+</html>

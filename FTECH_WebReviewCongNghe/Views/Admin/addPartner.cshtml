@@ -1,0 +1,163 @@
+﻿@{ FTECH_WebReviewCongNghe.Models.TAIKHOAN tk = (FTECH_WebReviewCongNghe.Models.TAIKHOAN)Session["account"]; }
+@{
+    ViewBag.Title = "addPartner";
+    Layout = null;
+    List<FTECH_WebReviewCongNghe.Models.DOITAC> dsDT = ViewBag.dsDoitac;
+    FTECH_WebReviewCongNghe.Models.DOITAC dt = ViewBag.dt;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Thêm đối tác</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/MySource/admin/vendor/fontawesome-free-6.5.2-web/fontawesome-free-6.5.2-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/MySource/admin/css/content-admin.min.css" rel="stylesheet">
+    <link href="~/MySource/admin/css/stylepn.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/MySource/css/add2.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+</head>
+
+<body>
+       
+        <div id="wrapper" style="background-color:#fff">
+            <ul class="sidebar navbar-nav">
+                <img src="~/MySource/img/logo.jpg"> <!-- Hình ảnh mặc định -->
+                <li class="nav-item" style="text-align: center; margin-bottom:15px" ">
+                    <a class="nav-link avt" href="~/MySource/admin/#" id="userDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img src="~/MySource/img/avt.jpg" class="avatar" alt="Avatar" style="width: 50px; height: 50px; float: left; margin-right: 10px; border-radius: 50%;">
+                        <div style="float: left;">
+                            <span class="name" style="display: block; font-weight: bold; ">@tk.HOVATEN</span>
+                            <span class="job" style="font-size: smaller;">@tk.CHUCVU.TENCHUCVU</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="~/Admin/PartnerManage">
+                        <i class="fa-solid fa-file"  style="color: #ffffff;" ></i>
+                        <span >Quản lý đối tác liên kết</span>
+                    </a>
+                </li>
+                <li class="nav-item @(ViewBag.Title == " addPartner"?"active":null)" style="background-color: #CEE2F5;">
+                    <a class="nav-link" href="~/Admin/addPartner">
+                        <i class="fa-solid fa-plus" style="color: #121212;"></i>
+                        <span style="color: #121212;font-weight: 500;">Thêm đối tác</span>
+                    </a>
+                </li>
+            </ul>
+        
+            <div id="content-wrapper" style="color:#0A5DA9 ;">
+                <div class="container-fluid">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fa-solid fa-bars"></i>
+                            <a href="~/Admin/Index" style="text-decoration: none; color: #0A5DA9">
+                                Quản lý
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                            <a href="~/Admin/PartnerManage" style="text-decoration: none; color: #0A5DA9">
+                                Đối tác liên kết
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                            <a>
+                                Thêm đối tác
+                            </a>
+                        </div>
+                        <h1 class="title_addPr" style="margin-top:30px">THÊM ĐỐI TÁC</h1>
+                        <div class="container">
+                            <div class="addPd_container2">
+                                <div class="form_add">
+                                    <form action="~/Admin/addPartner" method="post" enctype="multipart/form-data">
+                                        <label for="tencongty">Tên công ty</label>
+                                        <input type="text" id="ten-cong-ty" name="TENCONGTY" required>
+                                        <label for="canhandaidien">Cá nhân đại diện</label>
+                                        <input type="text" id="ca-nhan-dai-dien" name="CANHANDAIDIEN" required>
+                                        <label for="sodienthoai">Số điện thoại</label>
+                                        <input type="text" id="so-dien-thoai" name="SDT" required>
+                                        <label for="email">Email:</label>
+                                        <input type="text" id="email" name="EMAIL" required>
+                                        <label for="masothue">Mã số thuế</label>
+                                        <input type="text" id="ma-so-thue" name="MASOTHUE" required>
+                                        <label for="diachi">Địa chỉ</label>
+                                        <input type="text" id="dia-chi" name="DIACHI" required>
+                                        <label for="thoigianbatdau">Thời gian bắt đầu</label>
+                                        <input type="text" id="thoi-gian-bat-dau" name="THOIGIANBATDAU" required>
+
+                                        <script>
+                                            $(function () {
+                                                $("#thoi-gian-bat-dau").datepicker({
+                                                    dateFormat: 'mm/dd/yy'
+                                                });
+                                            });
+                                        </script>
+                                        <!--    <label for="phuongthucthanhtoan">Phương thức thanh toán</label>
+        <input type="text" id="phuong-thuc-thanh-toan" name="PHUONGTHUCTHANHTOAN" required> -->
+                                        <label for="sotaikhoan">Số tài khoản</label>
+                                        <input type="text" id="so-tai-khoan" name="SOTAIKHOAN" required>
+                                        <label for="nganhang">Ngân hàng</label>
+                                        <input type="text" id="ngan-hang" name="NGANHANG" required>
+                                        <label for="tentaikhoan">Tên tài khoản</label>
+                                        <input type="text" id="ten-tai-khoan" name="TENTAIKHOAN" required>
+                                        <label for="hop-dong">Hợp đồng</label>
+                                        <input type="file" id="hop-dong" name="HOPDONG" accept=".pdf, image/*">
+                                        <button type="button" onclick="uploadFile()">Xem hợp đồng</button>
+                                        <div id="preview"></div>
+                                        <div class="addPr_btn">
+                                            <a href="~/Admin/PartnerManage"><button type="button">Trở về</button></a>
+                                            <button type="submit">Thêm mới</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+             </div>
+            </div>
+</body>
+<script>
+    function uploadFile() {
+        const fileInput = document.getElementById('hop-dong');
+        const preview = document.getElementById('preview');
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        if (file) {
+            const fileType = file.type;
+            if (fileType === 'application/pdf') {
+                reader.onload = function (e) {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = e.target.result;
+                    iframe.width = '100%';
+                    iframe.height = '600px';
+                    preview.innerHTML = '';
+                    preview.appendChild(iframe);
+                };
+                reader.readAsDataURL(file);
+            } else if (fileType.startsWith('image/')) {
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.width = '100%';
+                    preview.innerHTML = '';
+                    preview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('File không được hỗ trợ để xem trước.');
+            }
+        } else {
+            alert('Vui lòng chọn một tệp để xem trước.');
+        }
+    }
+</script>
+</html>
